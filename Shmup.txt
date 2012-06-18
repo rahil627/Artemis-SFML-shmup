@@ -1,0 +1,1 @@
+./Debug/main.o ./Debug/InputEvent.o ./Debug/Player.o  
