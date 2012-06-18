@@ -17,12 +17,15 @@ namespace st{
 			float speed;
 			st::event::EventDispatcher dispatcher;
 			float fireRate;
+			float fireCounter;
+			bool isShooting;
+			bool isSlowingTime;
 			
 		public:
 			Player();
 			virtual void onJoyEvent(st::input::JoyEvent evt);
 			virtual void update(float dt);
-			virtual void shoot();
+			virtual void shoot(float dt);
 			virtual void slowDown();
 			
 			virtual void addEventListener(const std::string &type, st::event::function listener, int priority = 0);

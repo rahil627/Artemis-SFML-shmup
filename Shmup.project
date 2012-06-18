@@ -17,10 +17,15 @@
     <VirtualDirectory Name="objects">
       <File Name="Player.cpp"/>
       <File Name="Player.h"/>
+      <File Name="Bullet.h"/>
+      <File Name="Bullet.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="Management">
       <File Name="ObjectPool.h"/>
       <File Name="Collision.h"/>
+      <File Name="ObjectHandlers.h"/>
+      <File Name="Collision.cpp"/>
+      <File Name="ObjectHandlers.cpp"/>
     </VirtualDirectory>
   </VirtualDirectory>
   <Settings Type="Executable">
@@ -37,6 +42,7 @@
       <Compiler Options="-g;-O0;-Wall;" C_Options="-g;-O0;-Wall" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" UseDifferentPCHFlags="no" PCHFlags="">
         <IncludePath Value="."/>
         <IncludePath Value="$(ProjectPath)/../../SFML2/include/"/>
+        <Preprocessor Value="_DEBUG"/>
       </Compiler>
       <Linker Options="-static-libstdc++;" Required="yes">
         <LibraryPath Value="$(ProjectPath)/../../SFML2/lib/"/>
@@ -46,7 +52,7 @@
       </Linker>
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes"/>
-      <Environment EnvVarSetName="Default" DbgSetName="&lt;Use Defaults&gt;">
+      <Environment EnvVarSetName="Default" DbgSetName="Default">
         <![CDATA[]]>
       </Environment>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">

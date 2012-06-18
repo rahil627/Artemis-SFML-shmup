@@ -1,1 +1,1 @@
-./Debug/main.o ./Debug/InputEvent.o ./Debug/Player.o  
+./Debug/main.o ./Debug/InputEvent.o ./Debug/Player.o ./Debug/Bullet.o ./Debug/Collision.o ./Debug/ObjectHandlers.o  
