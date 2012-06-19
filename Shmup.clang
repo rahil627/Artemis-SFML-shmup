@@ -30,4 +30,12 @@
     </std_string_set>
     <std_string_set Name="m_frameworks"/>
   </Configuration>
+  <Configuration Name="Release">
+    <std_string_set Name="m_macros"/>
+    <std_string_set Name="m_searchPaths">
+      <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Assignment5</SetEntry>
+      <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Shmup/../../SFML2/include/</SetEntry>
+    </std_string_set>
+    <std_string_set Name="m_frameworks"/>
+  </Configuration>
 </ClangCodeCompletion>

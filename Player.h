@@ -14,6 +14,7 @@ namespace st{
 		private:
 		
 			sf::Vector2f velocity;
+			
 			float speed;
 			st::event::EventDispatcher dispatcher;
 			float fireRate;
@@ -22,8 +23,11 @@ namespace st{
 			bool isSlowingTime;
 			
 		public:
+			
+			sf::Vector2f shootingDir;
+		
 			Player();
-			virtual void onJoyEvent(st::input::JoyEvent evt);
+			virtual void onJoyData(st::input::JoyData &evt);
 			virtual void update(float dt);
 			virtual void shoot(float dt);
 			virtual void slowDown();

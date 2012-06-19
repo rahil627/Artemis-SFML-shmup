@@ -14,37 +14,54 @@ namespace st{
 			Y = 3, 
 			L = 4, 
 			R = 5, 
-			BACK = 6, 
+			Back = 6, 
 			START = 7, 
 			LS = 8, 
 			RS = 9
 		};
 		
-		typedef struct JoyEvent{
+		typedef struct JoyData{
 			
-			float dt;
+			float LSAxisX; 
+			float LSAxisY;	
+			float RSAxisX; 
+			float RSAxisY;	
+
+			int povX;
+			int povY;
 			
-			float axisX; 
-			float axisY;		
+			bool A;
+			bool B;
+			bool X;
+			bool Y;
+			bool L;
+			bool LS;
+			bool R;
+			bool RS;
 			
-			bool buttonA;
-			bool buttonB;
-			bool buttonX;
-			bool buttonY;
-			bool buttonL;
-			bool buttonLS;
-			bool buttonR;
-			bool buttonRS;
-			bool buttonStart;
-			bool buttonBack;
+			bool Start;
+			bool Back;
 			
-		}JoyEvent;
+			bool actionA;
+			bool actionB;
+			bool actionX;
+			bool actionY;
+			bool actionL;
+			bool actionLS;
+			bool actionR;
+			bool actionRS;
+			
+			bool actionStart;
+			bool actionBack;
+			
+			
+		}JoyData;
 		
 		//=======================================================
 		class IJoyListener{
 			
 		public:
-			virtual void onJoyEvent(JoyEvent evt) = 0; 
+			virtual void onJoyData(JoyData &evt) = 0; 
 			
 		};
 		//=======================================================
@@ -52,12 +69,16 @@ namespace st{
 			
 		public:
 			JoyInput();
+			~JoyInput();
 			void registerObject(st::input::IJoyListener* listener, unsigned int id);
 			void deRegisterObject(st::input::IJoyListener* listener, unsigned int id);
-			void update(float dt);
+			void initData(JoyData& data);
+			void update();
 			
 		private:
-			std::vector<IJoyListener*> controllerID;
+			IJoyListener *controllerID[4];
+			JoyData previousState[4];
+			JoyData padData[4];
 			
 		protected:
 			

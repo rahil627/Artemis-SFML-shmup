@@ -23,10 +23,12 @@ ObjectPool<Bullet> bulletPool;
 st::gameobject::Player p;
 
 void shoot(const st::event::Event& evt) {
+
 	Bullet * b = bulletPool.getResource();
 	b->setPosition(p.getPosition());
-	b->dVector.x = 1;
-	b->dVector.y = 0;
+	b->dVector.x = p.shootingDir.x;
+	b->dVector.y = p.shootingDir.y;
+	b->rotate(atan2(p.shootingDir.y,p.shootingDir.x) * (180/M_PI));
 	bulletList.push_back(b);
 	//std::cout << bulletList.size() << std::endl;
 	//counter = 0;
@@ -63,7 +65,7 @@ int main(int argc, char **argv) {
 	while (window.isOpen()) {
 		// Process events
 		dt = deltaClock.restart();
-		joyInput.update(dt.asSeconds());
+		joyInput.update();
 		counter += dt.asSeconds() * (timeSpeed * 5);
 		sf::Event event;
 		while (window.pollEvent(event)) {

@@ -12,19 +12,27 @@ namespace st{
 			fireRate = .1;
 		}
 		
-		void Player::onJoyEvent(st::input::JoyEvent evt){
+		void Player::onJoyData(st::input::JoyData &evt){
 			
-			velocity.x =  ((abs(evt.axisX) > 20) ? evt.axisX:0) * (0.1f * speed);
-			velocity.y =  ((abs(evt.axisY) > 20) ? evt.axisY:0 )* (0.1f * speed);
+			velocity.x =  ((abs(evt.LSAxisX) > 20) ? evt.LSAxisX:0) * (0.1f * speed);
+			velocity.y =  ((abs(evt.LSAxisY) > 20) ? evt.LSAxisY:0 )* (0.1f * speed);
+			shootingDir.x = evt.RSAxisX * 0.01;
+			shootingDir.y = evt.RSAxisY * 0.01;
 			
-			 isShooting = evt.buttonX;
-			/*if(evt.buttonA) std::cout << "A";//slowDown();
-			if(evt.buttonB) std::cout << "B";//slowDown();
-			if(evt.buttonY) std::cout << "Y";//slowDown();
-			if(evt.buttonL) std::cout << "L";//slowDown();
-			if(evt.buttonR) std::cout << "R";//slowDown();
-			if(evt.buttonLS) std::cout << "LS";//slowDown();
-			if(evt.buttonRS) std::cout << "RS";//slowDown();*/
+			isShooting = (abs(shootingDir.x) > 0.5 || abs(shootingDir.y) > 0.5);
+			
+			//isShooting = evt.actionX || evt.A;
+			// std::cout << shootingDir.y<<  "\n";//slowDown();
+			/*if(evt.actionA ) std::cout << "A\n";//slowDown();
+			if(evt.actionB ) std::cout << "B\n";//slowDown();
+			if(evt.actionY ) std::cout << "Y\n";//slowDown();
+			if(evt.actionX ) std::cout << "X\n";//slowDown();
+			if(evt.actionL ) std::cout << "L\n";//slowDown();
+			if(evt.actionR ) std::cout << "R\n";//slowDown();
+			if(evt.actionLS ) std::cout << "LS\n";//slowDown();
+			if(evt.actionRS ) std::cout << "RS\n";//slowDown();
+			if(evt.povX != 0) std::cout << evt.povX << "\n";//slowDown();
+			if(evt.povY != 0) std::cout << evt.povY<< "\n";//slowDown();*/
 			
 		}
 		
