@@ -5,6 +5,7 @@ namespace st{
 	namespace input{
 		
 		JoyInput::JoyInput(){
+			
 			for(size_t i=0; i<4; i++)
 			{
 				controllerID[i] = 0;

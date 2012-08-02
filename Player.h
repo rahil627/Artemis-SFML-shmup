@@ -12,6 +12,7 @@ namespace st{
 		
 		class Player : public sf::Sprite, public st::input::IJoyListener, public st::event::IEventListener{
 		private:
+			static sf::Texture * img;
 		
 			sf::Vector2f velocity;
 			
@@ -21,6 +22,8 @@ namespace st{
 			float fireCounter;
 			bool isShooting;
 			bool isSlowingTime;
+			float powerBoost;
+			bool powerShotReady;
 			
 		public:
 			

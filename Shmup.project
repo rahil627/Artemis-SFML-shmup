@@ -13,6 +13,7 @@
       <File Name="Event.h"/>
       <File Name="InputEvent.h"/>
       <File Name="InputEvent.cpp"/>
+      <File Name="ShootEvent.h"/>
     </VirtualDirectory>
     <VirtualDirectory Name="objects">
       <File Name="Player.cpp"/>
@@ -26,8 +27,25 @@
       <File Name="ObjectHandlers.h"/>
       <File Name="Collision.cpp"/>
       <File Name="ObjectHandlers.cpp"/>
+      <File Name="TextureManager.cpp"/>
+      <File Name="TextureManager.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Behaviour">
+      <File Name="IShootBehavior.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="systems">
+      <File Name="MovementSystem.h"/>
+      <File Name="PlayerJoySystem.h"/>
+      <File Name="SpriteSystem.h"/>
+      <File Name="ColliderSystem.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="component">
+      <File Name="MovementComponent.h"/>
+      <File Name="SpriteComponent.h"/>
     </VirtualDirectory>
   </VirtualDirectory>
+  <Dependencies Name="Debug"/>
+  <Dependencies Name="Release"/>
   <Settings Type="Executable">
     <GlobalSettings>
       <Compiler Options="" C_Options="">
@@ -39,20 +57,25 @@
       <ResourceCompiler Options=""/>
     </GlobalSettings>
     <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-g;-O0;-Wall;" C_Options="-g;-O0;-Wall" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" UseDifferentPCHFlags="no" PCHFlags="">
+      <Compiler Options="-g;-O0;-Wall;-std=c++11;" C_Options="-g;-O0;-Wall;" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" UseDifferentPCHFlags="no" PCHFlags="">
         <IncludePath Value="."/>
         <IncludePath Value="$(ProjectPath)/../../SFML2/include/"/>
+        <IncludePath Value="$(ProjectPath)/include"/>
         <Preprocessor Value="_DEBUG"/>
+        <Preprocessor Value="_NOTHREADS"/>
+        <Preprocessor Value="GLIBCXX_FORCE_NEW"/>
       </Compiler>
-      <Linker Options="-static-libstdc++;" Required="yes">
+      <Linker Options="" Required="yes">
         <LibraryPath Value="$(ProjectPath)/../../SFML2/lib/"/>
+        <LibraryPath Value="$(ProjectPath)/bin32/"/>
         <Library Value="libsfml-graphics-d.a"/>
         <Library Value="libsfml-window-d.a"/>
         <Library Value="libsfml-system-d.a"/>
+        <Library Value="artemis.dll"/>
       </Linker>
       <ResourceCompiler Options="" Required="no"/>
-      <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes"/>
-      <Environment EnvVarSetName="Default" DbgSetName="Default">
+      <General OutputFile="$(IntermediateDirectory)/bin/$(ProjectName)" IntermediateDirectory="./Debug" Command="$(ProjectPath)/$(IntermediateDirectory)/bin/Shmup.exe" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)/bin/" PauseExecWhenProcTerminates="yes"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
@@ -60,7 +83,9 @@
         <StartupCommands/>
       </Debugger>
       <PreBuild/>
-      <PostBuild/>
+      <PostBuild>
+        <Command Enabled="yes">copy $(ProjectPath)\bin32\artemis.dll $(ProjectPath)\Debug\bin</Command>
+      </PostBuild>
       <CustomBuild Enabled="no">
         <RebuildCommand/>
         <CleanCommand/>
@@ -75,26 +100,29 @@
         <CustomPostBuild/>
         <CustomPreBuild/>
       </AdditionalRules>
-      <Completion EnableCpp11="no">
+      <Completion EnableCpp11="yes">
         <ClangCmpFlags/>
         <ClangPP/>
         <SearchPaths>.;
-$(ProjectPath)/../../SFML2/include/</SearchPaths>
+$(ProjectPath)/include/;</SearchPaths>
       </Completion>
     </Configuration>
     <Configuration Name="Release" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-O2;-Wall" C_Options="-O2;-Wall" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" UseDifferentPCHFlags="no" PCHFlags="">
+      <Compiler Options="-O3;-Wall;-std=c++11;" C_Options="-O3;-Wall" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" UseDifferentPCHFlags="no" PCHFlags="">
         <IncludePath Value="."/>
         <IncludePath Value="$(ProjectPath)/../../SFML2/include/"/>
+        <IncludePath Value="$(ProjectPath)/include/"/>
       </Compiler>
-      <Linker Options="-static-libstdc++;" Required="yes">
+      <Linker Options="-Wl,-subsystem,windows;-static-libstdc++" Required="yes">
         <LibraryPath Value="$(ProjectPath)/../../SFML2/lib/"/>
+        <LibraryPath Value="$(ProjectPath)/bin32"/>
         <Library Value="libsfml-graphics.a"/>
         <Library Value="libsfml-window.a"/>
         <Library Value="libsfml-system.a"/>
+        <Library Value="artemis.dll"/>
       </Linker>
       <ResourceCompiler Options="" Required="no"/>
-      <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Release" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes"/>
+      <General OutputFile="$(IntermediateDirectory)/bin/$(ProjectName)" IntermediateDirectory="./Release" Command="$(ProjectPath)/$(IntermediateDirectory)/bin/Shmup.exe" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)/bin/" PauseExecWhenProcTerminates="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>
@@ -103,7 +131,9 @@ $(ProjectPath)/../../SFML2/include/</SearchPaths>
         <StartupCommands/>
       </Debugger>
       <PreBuild/>
-      <PostBuild/>
+      <PostBuild>
+        <Command Enabled="yes">copy $(ProjectPath)\bin32\artemis.dll  $(ProjectPath)\Release\bin</Command>
+      </PostBuild>
       <CustomBuild Enabled="no">
         <RebuildCommand/>
         <CleanCommand/>

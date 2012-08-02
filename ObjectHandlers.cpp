@@ -19,7 +19,7 @@ namespace st {
 					it = bulletList.erase( it );
 					bulletPool.resturnResource( b );
 				} else
-					it++;
+					++it;
 			}
 		}
 	};

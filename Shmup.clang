@@ -2,9 +2,16 @@
 <ClangCodeCompletion>
   <Configuration Name="">
     <std_string_set Name="m_macros">
+      <SetEntry>GLIBCXX_FORCE_NEW</SetEntry>
       <SetEntry>_DEBUG</SetEntry>
+      <SetEntry>_NOTHREADS</SetEntry>
     </std_string_set>
     <std_string_set Name="m_searchPaths">
+      <SetEntry>C:/Program Files (x86)/PureDev Software/MemPro/MemProLib/MemProCpp</SetEntry>
+      <SetEntry>C:/Program Files (x86)/PureDev Software/MemPro/MemProLib/MemProLib</SetEntry>
+      <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis</SetEntry>
+      <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/src</SetEntry>
+      <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/ArtemisTest</SetEntry>
       <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Assignment5</SetEntry>
       <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Shmup/../../Bromeon-Thor/extlibs/aurora/include</SetEntry>
       <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Shmup/../../Bromeon-Thor/include</SetEntry>
@@ -12,29 +19,57 @@
       <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Shmup/../../SFML2/include/</SetEntry>
       <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Shmup/../SFML/include</SetEntry>
       <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Shmup/SFML/include</SetEntry>
+      <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Shmup/artemis</SetEntry>
+      <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Shmup/db</SetEntry>
+      <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Shmup/include</SetEntry>
+      <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Shmup/include/</SetEntry>
+      <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Shmup/includerelease/</SetEntry>
     </std_string_set>
     <std_string_set Name="m_frameworks"/>
   </Configuration>
   <Configuration Name="Debug">
     <std_string_set Name="m_macros">
+      <SetEntry>DEBUG_MEMORY</SetEntry>
+      <SetEntry>DEBUG_MEMORY_IMPLEMENTATION</SetEntry>
+      <SetEntry>GLIBCXX_FORCE_NEW</SetEntry>
       <SetEntry>_DEBUG</SetEntry>
       <SetEntry>_KUTJE</SetEntry>
+      <SetEntry>_NOTHREADS</SetEntry>
     </std_string_set>
     <std_string_set Name="m_searchPaths">
+      <SetEntry>C:/Program Files (x86)/PureDev Software/MemPro/MemProCPP</SetEntry>
+      <SetEntry>C:/Program Files (x86)/PureDev Software/MemPro/MemProLib/MemProCPP</SetEntry>
+      <SetEntry>C:/Program Files (x86)/PureDev Software/MemPro/MemProLib/MemProCpp</SetEntry>
+      <SetEntry>C:/Program Files (x86)/PureDev Software/MemPro/MemProLib/MemProLib</SetEntry>
+      <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis</SetEntry>
+      <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/src</SetEntry>
+      <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/ArtemisTest</SetEntry>
       <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Assignment5</SetEntry>
       <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Shmup/../../Bromeon-Thor/extlibs/aurora/include</SetEntry>
       <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Shmup/../../Bromeon-Thor/include</SetEntry>
       <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Shmup/../../SFML2/include</SetEntry>
       <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Shmup/../../SFML2/include/</SetEntry>
       <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Shmup/SFML/include</SetEntry>
+      <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Shmup/artemis</SetEntry>
+      <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Shmup/db</SetEntry>
+      <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Shmup/include</SetEntry>
+      <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Shmup/include/</SetEntry>
     </std_string_set>
     <std_string_set Name="m_frameworks"/>
   </Configuration>
   <Configuration Name="Release">
     <std_string_set Name="m_macros"/>
     <std_string_set Name="m_searchPaths">
+      <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis</SetEntry>
+      <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/src</SetEntry>
+      <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/ArtemisTest</SetEntry>
       <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Assignment5</SetEntry>
       <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Shmup/../../SFML2/include/</SetEntry>
+      <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Shmup/artemis</SetEntry>
+      <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Shmup/db</SetEntry>
+      <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Shmup/db/</SetEntry>
+      <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Shmup/include/</SetEntry>
+      <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Shmup/includerelease/</SetEntry>
     </std_string_set>
     <std_string_set Name="m_frameworks"/>
   </Configuration>

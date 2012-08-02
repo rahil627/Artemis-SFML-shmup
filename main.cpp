@@ -1,115 +1,89 @@
-#include <stdio.h>
-#include <iostream>
-#include <math.h>
-#include <list>
-#include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
-#include "Event.h"
-#include "InputEvent.h"
-#include "Player.h"
-#include "Collision.h"
-#include "ObjectHandlers.h"
-#include "ObjectPool.h"
-
-using namespace st::gameobject;
-using namespace st::objecthandlers;
-using namespace st::management;
-
-float timeSpeed = 1;
-
-std::list<Bullet*> bulletList;
-ObjectPool<Bullet> bulletPool;
-st::gameobject::Player p;
-
-void shoot(const st::event::Event& evt) {
-
-	Bullet * b = bulletPool.getResource();
-	b->setPosition(p.getPosition());
-	b->dVector.x = p.shootingDir.x;
-	b->dVector.y = p.shootingDir.y;
-	b->rotate(atan2(p.shootingDir.y,p.shootingDir.x) * (180/M_PI));
-	bulletList.push_back(b);
-	//std::cout << bulletList.size() << std::endl;
-	//counter = 0;
-};
-
-void slowDown(const st::event::Event& evt) {
-	std::cout << evt.type << std::endl;
-};
+#include "SystemManager.h"
+#include "World.h"
+#include "EntityManager.h"
+#include "MovementSystem.h"
+#include "SpriteComponent.h"
+#include "SpriteSystem.h"
+#include "PlayerJoySystem.h"
+#include "ColliderSystem.h"
+#include "Entity.h"
+#include "TextureManager.h"
 
 
 int main(int argc, char **argv) {
 	
-	sf::RenderWindow window(sf::VideoMode(800, 600,32), "SFML window");
+	sf::RenderWindow window(sf::VideoMode(800, 600,32), "Artemis Power");
+	TextureManager tx;
+	TextureManager::getInstance().addSearchPath("assets/");
+	
+	artemis::World * world  = new artemis::World();
+	artemis::SystemManager * sm = world->getSystemManager();
+	//artemis::EntityManager * em = world->getEntityManager();
+	
+	MovementSystem 	& movsys 	= *(MovementSystem*)	sm->setSystem(new MovementSystem());
+	SpriteSystem 	& spritesys = *(SpriteSystem*)		sm->setSystem(new SpriteSystem(window));
+	PlayerJoySystem & playerJoy = *(PlayerJoySystem*)	sm->setSystem(new PlayerJoySystem());
+	ColliderSystem 	& collider 	= *(ColliderSystem*)	sm->setSystem(new ColliderSystem(800,600,100));
+	
+	sm->initializeAll();
+	
+	artemis::Entity * player;
+	for(int i=0; i< 1; i++)
+	{
+		
+		player = &world->createEntity(); 
+		player->addComponent(new SpriteComponent(TextureManager::getInstance().getTexture("player.png")));
+		player->addComponent(new MovementComponent(0,0));
+		player->addComponent(new PositionComponent(rand() % 800,rand() % 600));
+		player->addComponent(new PlayerJoyComponent(3,i));
+		player->addComponent(new ColliderComponent(100, 100,1,1));
+		player->refresh();
+		world->getGroupManager()->set("HUMAN", *player);
+		
+	}
 
 	sf::Clock deltaClock;
 	sf::Time dt;
 
-	Bullet * b;
-
-	float counter = 0.0f;
-
-	std::list<Bullet*>::iterator it;
-
 	window.setFramerateLimit(60);
 
-
-	st::input::JoyInput joyInput;
 	
-	p.addEventListener("shoot",shoot);
-	p.addEventListener("slowDown",slowDown);
-	
-	joyInput.registerObject(&p,0);
 	// Start the game loop
 	while (window.isOpen()) {
-		// Process events
-		dt = deltaClock.restart();
-		joyInput.update();
-		counter += dt.asSeconds() * (timeSpeed * 5);
+	//while (true) {
+		
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
+			window.close();
+			//break;
+		}
+		
 		sf::Event event;
 		while (window.pollEvent(event)) {
 			// Close window : exit
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-
-		if(sf::Joystick::isButtonPressed(0,2)) {
-			if(counter > .05f) {
-				
-
-			}
-		} else {
-			counter = 1;
-		}
-
-		if(sf::Joystick::isButtonPressed(0,0)) {
-			timeSpeed  = 0.1f;
-		} else {
-			timeSpeed = 1;
-		}
-
-
-		processBullet(bulletPool,bulletList,dt.asSeconds());
-
-		p.update(dt.asSeconds());
+		
+		
+		world->loopStart();
+		
+		playerJoy.process();
+		movsys.process();
+		collider.process();
 		// Clear screen
 		window.clear();
-
-		//Draw bullets
-		for ( it = bulletList.begin(); it != bulletList.end(); ++it) {
-			b = *it;
-			window.draw(*b);
-
-		}
-
-		window.draw(p);
-
+		//updateSpriteSystem
+		spritesys.process();
 		// Update the window
 		window.display();
-
-
+		
+		world->setDelta(deltaClock.restart().asSeconds());
+		//world->setDelta(0.016);
 	}
 
+
+	delete world;
 	return EXIT_SUCCESS;
 }

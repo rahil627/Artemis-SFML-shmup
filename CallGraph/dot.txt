@@ -1,0 +1,1 @@
+digraph e {0 [label="Call Graph is empty, please check settings of node resolutions for this plugin!", shape=none, height=2, width=2, fontname=Arial, fontsize=14.00];}
