@@ -108,7 +108,7 @@ class PlayerJoySystem : public artemis::EntityProcessingSystem {
 
 	private:
 		artemis::ComponentMapper<PlayerJoyComponent> pjMapper;
-		artemis::ComponentMapper<MovementComponent>  velMapper;
+		artemis::ComponentMapper<VelocityComponent>  velMapper;
 		artemis::ComponentMapper<PositionComponent>  posMapper;
 		
 		JoyData padData[4]; 
@@ -142,11 +142,11 @@ class PlayerJoySystem : public artemis::EntityProcessingSystem {
 			
 			PlayerJoyComponent & pj = *pjMapper.get(e);
 			JoyData& jd = padData[pj.playerId];
-			float & velX = velMapper.get(e)->velocityX;
-			float & velY = velMapper.get(e)->velocityY;
+			float & velX = velMapper.get(e)->velocity.x;
+			float & velY = velMapper.get(e)->velocity.y;
 			
-			float posX = posMapper.get(e)->posX;
-			float posY = posMapper.get(e)->posY;
+			float posX = posMapper.get(e)->position.x;
+			float posY = posMapper.get(e)->position.y;
 			
 			float jX = jd.LSAxisX;
 			float jY = jd.LSAxisY;
@@ -160,7 +160,7 @@ class PlayerJoySystem : public artemis::EntityProcessingSystem {
 					pj.delayAcc = 0.0f;
 					artemis::Entity& e = world->createEntity();
 					e.addComponent(new PositionComponent(posX,posY));
-					e.addComponent(new MovementComponent(500,0));
+					e.addComponent(new VelocityComponent(500,0));
 					e.addComponent(new SpriteComponent(TextureManager::getInstance().getTexture("bullet.png")));
 					e.addComponent(new ColliderComponent(10,10,0,1));
 					e.refresh();
@@ -179,7 +179,7 @@ class PlayerJoySystem : public artemis::EntityProcessingSystem {
 				pj.delayAcc = 0.0f;
 				artemis::Entity& e = world->createEntity();
 				e.addComponent(new PositionComponent(posX,posY));
-				e.addComponent(new MovementComponent(500,0));
+				e.addComponent(new VelocityComponent(500,0));
 				e.addComponent(new SpriteComponent(TextureManager::getInstance().getTexture("bullet.png")));
 				e.addComponent(new ColliderComponent(10,10,0,pj.playerId));
 				e.refresh();

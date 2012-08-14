@@ -11,12 +11,12 @@
 class MovementSystem : public artemis::EntityProcessingSystem {
 
 	private:
-		artemis::ComponentMapper<MovementComponent>  velocityMapper;
+		artemis::ComponentMapper<VelocityComponent>  velocityMapper;
 		artemis::ComponentMapper<PositionComponent>  positionMapper;
 
 	public:
 		MovementSystem() {
-			setComponentTypes<MovementComponent,PositionComponent>();
+			setComponentTypes<VelocityComponent,PositionComponent>();
 		};
 
 		virtual void begin(){
@@ -37,11 +37,10 @@ class MovementSystem : public artemis::EntityProcessingSystem {
 		virtual void processEntity(artemis::Entity &e) {
 			
 			PositionComponent & p = *positionMapper.get(e);
-			MovementComponent & v = *velocityMapper.get(e);
-			
+			VelocityComponent & v = *velocityMapper.get(e);
 
-			p.posX += v.velocityX * world->getDelta();
-			p.posY += v.velocityY * world->getDelta();
+			p.position.x += v.velocity.x * world->getDelta();
+			p.position.y += v.velocity.y * world->getDelta();
 			
 		};
 };

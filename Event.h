@@ -95,8 +95,8 @@ namespace st{
 		private:
 			std::map<const std::string, std::map<int, std::list<function> > > eventHandlerList;
 			
-			EventDispatcher(EventDispatcher const&){};              // Don't Implement
-			void operator=(EventDispatcher const&){};
+			EventDispatcher(EventDispatcher const&);              // Don't Implement
+			void operator=(EventDispatcher const&);
 		};
 		
 }

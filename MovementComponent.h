@@ -2,28 +2,26 @@
 #define MOVEMENTCOMPONENT_H
 
 #include "Component.h"
+#include "Vector2D.h"
 
-class MovementComponent : public artemis::Component{
+class VelocityComponent : public artemis::Component{
 public:
-	float velocityX;
-	float velocityY;
 	
-	MovementComponent(float velocityX, float velocityY){
-		this->velocityX = velocityX;
-		this->velocityY = velocityY;
-	}
+	Vector2D velocity;
+	
+	VelocityComponent(float velocityX, float velocityY)  
+	: velocity(velocityX,velocityY){}
 };
 
 class PositionComponent : public artemis::Component{
 	
 	
 public:
-	float posX;
-	float posY;
-	PositionComponent(float posX, float posY){
-		this->posX = posX;
-		this->posY = posY;
-	}
+	
+	Vector2D position;
+	
+	PositionComponent(float posX, float posY) 
+	: position(posX,posY){}
 };
 
 

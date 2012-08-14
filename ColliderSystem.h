@@ -1,18 +1,30 @@
 #ifndef COLL_SYS_H
 #define COLL_SYS_H
 
-
-#include "GroupManager.h"
 #include "EntityProcessingSystem.h"
 #include "Component.h"
 #include "Entity.h"
 #include "MovementComponent.h"
 #include "ComponentMapper.h"
-#include <vector>
+
+
+
+
+/**
+ * 
+ */
 class ColliderComponent : public artemis::Component{
 	
-	public:
+public:
+	
+	enum CollisionObjectType : int{
+	NONE = 0,
+	HUMAN,
+	BULLET
+};
+	
 	int width,height,collidionsId,objectId;
+	artemis::Entity* contact;
 	
 	ColliderComponent(int width, int height,int collidionsId, int objectId){
 		this->width = width;
@@ -20,6 +32,11 @@ class ColliderComponent : public artemis::Component{
 		this->collidionsId = collidionsId;
 		this->objectId = objectId;
 	}
+	
+	virtual ~ColliderComponent(){
+		
+	}
+	
 };
 
 /*class CollisionPolicy{
@@ -34,13 +51,14 @@ public:
 	
 };*/
 
+
+
 class ColliderSystem : public artemis::EntityProcessingSystem
 {
 private:
 	artemis::ComponentMapper<PositionComponent> posMapper;
 	artemis::ComponentMapper<ColliderComponent> collMapper;
 	
-	//std::vector<std::vector<artemis::Entity*> > collisionLists;
 	artemis::Bag<artemis::Bag<artemis::Entity*>*> * collisionBuckets;
 	
 	int cellXCount;
@@ -84,7 +102,6 @@ public:
 	
 	virtual void processEntities(artemis::ImmutableBag<artemis::Entity*>& bag)
 	{
-		
 		creatCollisionBuckets(bag);
 		
 		for(int i=0; i< collisionBuckets->getCapacity(); i++)
@@ -94,15 +111,20 @@ public:
 			
 			for(int j=0; j < bucket->getCount(); j++)
 			{
-				artemis::Entity ej = *bucket->get(j);
+				artemis::Entity& ej = *bucket->get(j);
 				for(int k=j+1; k < bucket->getCount(); k++)
 				{
-					artemis::Entity ek = *bucket->get(k);
-					if(collMapper.get(ej)->collidionsId == collMapper.get(ek)->collidionsId || 
-					collMapper.get(ej)->objectId < 5) 
+					//Do collision action
+					artemis::Entity& ek = *bucket->get(k);
+					
+					//Check collision policy
+					
+					if(collMapper.get(ej)->objectId == collMapper.get(ek)->objectId) 
 						   continue;
+						   
 					if(intersects(ej,ek)){
-						std::cout << "hit";
+						collMapper.get(ej)->contact = &ek;
+						collMapper.get(ek)->contact = &ej;
 					}
 				}
 			}
@@ -119,8 +141,8 @@ public:
 		
 		for(i=0; i<bag.getCount(); i++)
 		{
-			int bucketX = (int)posMapper.get(*bag.get(i))->posX / cellSize;
-			int bucketY = (int)posMapper.get(*bag.get(i))->posY / cellSize;
+			int bucketX = (int)posMapper.get(*bag.get(i))->position.x / cellSize;
+			int bucketY = (int)posMapper.get(*bag.get(i))->position.y / cellSize;
 			
 			int index = (bucketY * cellXCount) + bucketX;
 			
@@ -142,11 +164,11 @@ public:
 		ColliderComponent & col1 = *collMapper.get(first);
 		ColliderComponent & col2 = *collMapper.get(second);
 		
-		int posX1 = (int)posMapper.get(first)->posX - col1.width*0.5f;
-		int posY1 = (int)posMapper.get(first)->posY - col1.height*0.5f;
+		int posX1 = (int)posMapper.get(first)->position.x - col1.width*0.5f;
+		int posY1 = (int)posMapper.get(first)->position.y - col1.height*0.5f;
 		
-		int posX2 = (int)posMapper.get(second)->posX - col2.width*0.5f;
-		int posY2 = (int)posMapper.get(second)->posY - col2.height*0.5f;
+		int posX2 = (int)posMapper.get(second)->position.x - col2.width*0.5f;
+		int posY2 = (int)posMapper.get(second)->position.y - col2.height*0.5f;
 		
 		
 		if(posX1 + col1.width < posX2) return false;

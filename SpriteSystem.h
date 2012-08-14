@@ -41,7 +41,7 @@ class SpriteSystem : public artemis::EntityProcessingSystem {
 			PositionComponent & p = *positionMapper.get(e);
 			sf::Sprite & s = spriteMapper.get(e)->sprite;
 			
-			s.setPosition(p.posX,p.posY);
+			s.setPosition(p.position.x,p.position.y);
 			rWindow->draw(s);
 			
 			if(s.getPosition().x > 900 || s.getPosition().y > 900) {

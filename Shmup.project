@@ -20,6 +20,7 @@
       <File Name="Player.h"/>
       <File Name="Bullet.h"/>
       <File Name="Bullet.cpp"/>
+      <File Name="PayLoad.h"/>
     </VirtualDirectory>
     <VirtualDirectory Name="Management">
       <File Name="ObjectPool.h"/>
@@ -38,11 +39,20 @@
       <File Name="PlayerJoySystem.h"/>
       <File Name="SpriteSystem.h"/>
       <File Name="ColliderSystem.h"/>
+      <File Name="HealthColliderSystem.h"/>
+      <File Name="HealthColliderSystem.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="component">
       <File Name="MovementComponent.h"/>
       <File Name="SpriteComponent.h"/>
+      <File Name="HealthComponent.h"/>
     </VirtualDirectory>
+    <VirtualDirectory Name="math">
+      <File Name="Vector2D.h"/>
+      <File Name="Vector2D.cpp"/>
+    </VirtualDirectory>
+    <File Name="EntityFactory.h"/>
+    <File Name="EntityFactory.cpp"/>
   </VirtualDirectory>
   <Dependencies Name="Debug"/>
   <Dependencies Name="Release"/>

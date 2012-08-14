@@ -1,1 +1,1 @@
-./Release/main.o ./Release/InputEvent.o ./Release/Player.o ./Release/Bullet.o ./Release/Collision.o ./Release/ObjectHandlers.o ./Release/TextureManager.o  
+./Debug/main.o ./Debug/InputEvent.o ./Debug/Player.o ./Debug/Bullet.o ./Debug/Collision.o ./Debug/ObjectHandlers.o ./Debug/TextureManager.o ./Debug/HealthColliderSystem.o ./Debug/Vector2D.o ./Debug/EntityFactory.o  

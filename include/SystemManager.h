@@ -17,11 +17,11 @@ namespace artemis {
 			~SystemManager();
 			void initializeAll();
 			Bag<EntitySystem*> & getSystems();
-			EntitySystem * setSystem(EntitySystem * stm);
+			EntitySystem& setSystem(EntitySystem * stm);
 
 			template<typename eSystem>
-			EntitySystem* getSystem() {
-				return (eSystem*)(systems[typeid(eSystem).hash_code()]);
+			EntitySystem& getSystem() {
+				return *(eSystem*)(systems[typeid(eSystem).hash_code()]);
 			}
 
 		private:
